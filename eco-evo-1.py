@@ -17,7 +17,7 @@ X = [[N0], [M0], [u0], [0], [M0 / (N0 + M0)]]  # 初期値[N,M,u,t,M/(N+M)]を�
 def Batesian(N, M, u, a=0.4, b=0.5, c=1, r0=0.5, g0=0.8, P=1, k=50, G=0.005, K1=100, K2=100):  # 微分方程式の定義
     N_dot = N * (r0 * (1 - N / K1 - c * u) - a * P * ((M / (N + M)) ** (k * u)))  # モデル
     M_dot = M * (g0 * (1 - M / K2) - b * P * ((M / (N + M)) ** (k * u)))  # 擬態種
-    u_dot = (-r0 * c - a * k * math.log(M / (N + M)) * ((M / (N + M)) ** (k * u))) * G
+    u_dot = (-r0 * c - a * k * math.log(M / (N + M)) * ((M / (N + M)) ** (k * u))) * G # 毒性の進化
     if u <= 0:  # u>0を考慮
         u_dot = 0
     return np.array([N_dot, M_dot, u_dot])
