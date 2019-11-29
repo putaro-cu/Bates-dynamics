@@ -1,5 +1,5 @@
 # Adams-Bashforth-Moulton法による数値解導出(Scipyのodeintを使用)
-# うまく収束しない
+# うまく収束しないので使えないかも？
 
 import numpy as np
 from scipy.integrate import odeint
