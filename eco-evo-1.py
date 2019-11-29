@@ -60,9 +60,9 @@ axes[1, 0].set_title("poison", size=14)
 axes[1, 0].set_xlabel("time", size=14)
 axes[1, 0].set_ylabel("level", size=14)
 
-axes[1, 1].plot(X[3], X[4])
-axes[1, 1].set_title("AI", size=14)
-axes[1, 1].set_xlabel("time", size=14)
-axes[1, 1].set_ylabel("M/(M+N)", size=14)
+axes[1, 1].plot(X[0], X[1])
+axes[1, 1].set_title("", size=14)
+axes[1, 1].set_xlabel("model", size=14)
+axes[1, 1].set_ylabel("mimic", size=14)
 
 fig.show()
