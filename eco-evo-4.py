@@ -18,7 +18,7 @@ c = 0.5
 r0 = 0.5
 g0 = 0.8
 P = 1
-K = 50
+k = 50
 G = 0.005
 K1 = 100
 K2 = 100
@@ -33,21 +33,21 @@ def Batesian(N, M, u, a, b, c, r0, g0, P, k, G, K1, K2):  # 微分方程式の�
     return np.array([N_dot, M_dot, u_dot])
 
 
-k = np.zeros([3, 5])  # [k1,k2,k3,k4,k] #数字の文字列になっている
+K = np.zeros([3, 5])  # [k1,k2,k3,k4,k] #数字の文字列になっている
 
 while t < t_max:  # 時間がt_maxになるまで計算
 
     # Batesian関数のx,y,zを指定。[-1]はリストの最後の要素を表す。
     N, M, u = X[0][-1], X[1][-1], X[2][-1]
 
-    k[:, 0] = h * Batesian(N, M, u, a, b, c, r0, g0, P, K, G, K1, K2)
-    k[:, 1] = h * Batesian(N + k[0, 0] / 2.0, M + k[1, 0] / 2.0, u + k[2, 0] / 2.0, a, b, c, r0, g0, P, K, G, K1, K2)
-    k[:, 2] = h * Batesian(N + k[0, 1] / 2.0, M + k[1, 1] / 2.0, u + k[2, 1] / 2.0, a, b, c, r0, g0, P, K, G, K1, K2)
-    k[:, 3] = h * Batesian(N + k[0, 2], M + k[1, 2], u + k[2, 2], a, b, c, r0, g0, P, K, G, K1, K2)
-    k[:, 4] = (k[:, 0] + 2.0 * k[:, 1] + 2.0 * k[:, 2] + k[:, 3]) / 6.0
+    K[:, 0] = h * Batesian(N, M, u, a, b, c, r0, g0, P, k, G, K1, K2)
+    K[:, 1] = h * Batesian(N + K[0, 0] / 2.0, M + K[1, 0] / 2.0, u + K[2, 0] / 2.0, a, b, c, r0, g0, P, k, G, K1, K2)
+    K[:, 2] = h * Batesian(N + K[0, 1] / 2.0, M + K[1, 1] / 2.0, u + K[2, 1] / 2.0, a, b, c, r0, g0, P, k, G, K1, K2)
+    K[:, 3] = h * Batesian(N + K[0, 2], M + K[1, 2], u + K[2, 2], a, b, c, r0, g0, P, k, G, K1, K2)
+    K[:, 4] = (K[:, 0] + 2.0 * K[:, 1] + 2.0 * K[:, 2] + K[:, 3]) / 6.0
 
     for j in range(3):
-        X[j].append(X[j][-1] + k[j, 4])
+        X[j].append(X[j][-1] + K[j, 4])
 
     X[3].append(t)
     X[4].append(X[1][-1] / (X[0][-1] + X[1][-1]))
@@ -66,8 +66,8 @@ axes[0, 1].set_xlabel("time", size=14)
 axes[0, 1].set_ylabel("M", size=14)
 
 axes[1, 0].plot(X[3], X[2])
-u_lim = math.log(-c * r0 / (a * K * P * math.log(X[1][-1] / (X[1][-1] + X[0][-1])))) / (
-            K * math.log(X[1][-1] / (X[1][-1] + X[0][-1])))
+u_lim = math.log(-c * r0 / (a * k * P * math.log(X[1][-1] / (X[1][-1] + X[0][-1])))) / (
+            k * math.log(X[1][-1] / (X[1][-1] + X[0][-1])))
 axes[1, 0].axhline(u_lim, ls="-.", color="magenta")
 axes[1, 0].set_title("poison", size=14)
 axes[1, 0].set_xlabel("time", size=14)
