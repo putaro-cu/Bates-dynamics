@@ -57,13 +57,21 @@ G = 0.1
 x = np.arange(1, 100, 1)
 y = np.arange(1, 100, 1)
 X, Y = np.meshgrid(x, y)
+
 Z = [[0 for i in range(len(x))] for j in range(len(y))]
 for i, K1 in enumerate(x):
     for j, K2 in enumerate(y):
-        Z[i][j] = Solver(N0, M0, u0, a, b, c, r0, g0, P, k, G, K1, K2)[0]
+        Z[j][i] = Solver(N0, M0, u0, a, b, c, r0, g0, P, k, G, K1, K2)[1]
 plt.pcolormesh(X, Y, Z, cmap="plasma")
 plt.colorbar()  # カラーバーの表示
 plt.xlabel('K1')
 plt.ylabel('K2')
-plt.title("model")
+plt.title("poison")
+plt.show()
+
+plt.contour(X, Y, Z, 20, cmap="plasma")
+plt.xlabel('K1')
+plt.ylabel('K2')
+plt.colorbar()  # カラーバーの表示
+plt.title("poison")
 plt.show()
