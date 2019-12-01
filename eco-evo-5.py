@@ -66,12 +66,12 @@ plt.pcolormesh(X, Y, Z, cmap="plasma")
 plt.colorbar()  # カラーバーの表示
 plt.xlabel('K1')
 plt.ylabel('K2')
-plt.title("poison")
+plt.title("mimic")
 plt.show()
 
 plt.contour(X, Y, Z, 20, cmap="plasma")
 plt.xlabel('K1')
 plt.ylabel('K2')
 plt.colorbar()  # カラーバーの表示
-plt.title("poison")
+plt.title("mimic")
 plt.show()
