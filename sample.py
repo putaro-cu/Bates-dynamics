@@ -62,16 +62,13 @@ Z = [[0 for i in range(len(x))] for j in range(len(y))]
 for i, K1 in enumerate(x):
     for j, K2 in enumerate(y):
         Z[j][i] = Solver(N0, M0, u0, a, b, c, r0, g0, P, k, G, K1, K2)[2]
+
+pp = plt.contour(X, Y, Z, 5, colors=['black'])
+pp.clabel(fontsize=12)
+
 plt.pcolormesh(X, Y, Z, cmap="plasma")
 plt.colorbar()  # カラーバーの表示
 plt.xlabel('K1')
 plt.ylabel('K2')
-plt.title("poison")
-plt.show()
-
-plt.contour(X, Y, Z, 20, cmap="plasma")
-plt.xlabel('K1')
-plt.ylabel('K2')
-plt.colorbar()  # カラーバーの表示
 plt.title("poison")
 plt.show()
