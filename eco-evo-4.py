@@ -8,8 +8,8 @@ h = 0.01  # 刻み幅
 t = 0.0
 t_max = 60.0
 
-N0 = 80
-M0 = 80
+N0 = 0.8
+M0 = 0.8
 u0 = 0.05
 X = [[N0], [M0], [u0], [0], [M0 / (N0 + M0)]]  # 初期値[N,M,u,t,M/(N+M)]を表す。
 a = 0.4
@@ -20,8 +20,8 @@ g0 = 0.8
 P = 1
 k = 60
 G = 0.1
-K1 = 100
-K2 = 5
+K1 = 1
+K2 = 1
 
 
 def Batesian(N, M, u, a, b, c, r0, g0, P, k, G, K1, K2):  # 微分方程式の定義
@@ -66,9 +66,9 @@ axes[0, 1].set_xlabel("time", size=14)
 axes[0, 1].set_ylabel("M", size=14)
 
 axes[1, 0].plot(X[3], X[2])
-u_lim = math.log(-c * r0 / (a * k * P * math.log(X[1][-1] / (X[1][-1] + X[0][-1])))) / (
+""" u_lim = math.log(-c * r0 / (a * k * P * math.log(X[1][-1] / (X[1][-1] + X[0][-1])))) / (
             k * math.log(X[1][-1] / (X[1][-1] + X[0][-1])))
-axes[1, 0].axhline(u_lim, ls="-.", color="magenta")
+axes[1, 0].axhline(u_lim, ls="-.", color="magenta")"""
 axes[1, 0].set_title("poison", size=14)
 axes[1, 0].set_xlabel("time", size=14)
 axes[1, 0].set_ylabel("level", size=14)

@@ -42,42 +42,42 @@ def Solver(N0, M0, u0, a, b, c, r0, g0, P, k, G, K1, K2):
     return [X[0][-1], X[1][-1], X[2][-1]]
 
 
-N0 = 80
-M0 = 80
+N0 = 0.5
+M0 = 0.5
 u0 = 0.05
-# a = 0.4
-# b = 0.5
+a = 0.3
+b = 0.5
 c = 0.5
-r0 = 0.5
-g0 = 0.8
+# r0 = 0.5
+# g0 = 0.8
 P = 1
 k = 50
 G = 0.1
-K1 = 100
-K2 = 100
+K1 = 1
+K2 = 1
 
-x = np.linspace(0, 3, 10, endpoint=False)
-y = np.linspace(0, 3, 10, endpoint=False)
+x = np.linspace(0, 3, 50, endpoint=False)
+y = np.linspace(0, 3, 50, endpoint=False)
 X, Y = np.meshgrid(x, y)
 
 Z = [[0 for i in range(len(x))] for j in range(len(y))]
-for i, A in enumerate(x):
-    for j, B in enumerate(y):
-        lim = Solver(N0, M0, u0, A*r0, B*g0, c, r0, g0, P, k, G, K1, K2)
-        if lim[0] <= 0.0001:
-            if lim[1] <= 0.0001:  # 両方絶滅
+for i, r0 in enumerate(x):
+    for j, g0 in enumerate(y):
+        lim = Solver(N0, M0, u0, a, b, c, r0, g0, P, k, G, K1, K2)
+        if lim[0] <= 0.001:
+            if lim[1] <= 0.001:  # 両方絶滅
                 Z[j][i] = 0
             else:
                 Z[j][i] = 1  # モデル絶滅
         else:
-            if lim[1] <= 0.0001:  # ミミック絶滅
+            if lim[1] <= 0.001:  # ミミック絶滅
                 Z[j][i] = 2
             else:
                 Z[j][i] = 3  # 共存
 
 plt.pcolormesh(X, Y, Z, cmap="binary", vmin=0, vmax=3)
 plt.colorbar()  # カラーバーの表示
-plt.xlabel('A = α/r0')
-plt.ylabel('B = β/g0')
+plt.xlabel('r0')
+plt.ylabel('g0')
 plt.title("coexist or extinct")
 plt.show()
