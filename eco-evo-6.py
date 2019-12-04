@@ -56,8 +56,8 @@ G = 0.1
 K1 = 1
 K2 = 1
 
-x = np.linspace(0, 5, 50, endpoint=False)
-y = np.linspace(0, 5, 50, endpoint=False)
+x = np.linspace(0, 2, 50, endpoint=False)
+y = np.linspace(0, 2, 50, endpoint=False)
 X, Y = np.meshgrid(x, y)
 
 Z = [[0 for i in range(len(x))] for j in range(len(y))]
